@@ -3,7 +3,7 @@ const app = express()
 const agentesRouter = require('./routes/agentesRoutes')
 const casosRouter = require('./routes/casosRoutes')
 const authRouter = require('./routes/authRoutes')
-const usersRouter = require('./routes/usersRoutes')
+const usuariosRouter = require('./routes/usuariosRoutes')
 const setupSwagger = require('./docs/swagger')
 const errorHandler = require('./utils/errorHandler')
 const cookieParser = require('cookie-parser')
@@ -21,7 +21,7 @@ app.use('/casos', casosRouter)
 
 app.use('/auth', authRouter)
 
-app.use('/users', usersRouter)
+app.use('/', usuariosRouter)
 
 app.use((req, res) => {
     res.status(404).json({

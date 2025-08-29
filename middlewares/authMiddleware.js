@@ -13,7 +13,7 @@ function authMiddleware(req, res, next) {
     const authHeader = req.headers["authorization"]
     const headerToken = authHeader && authHeader.split(" ")[1]
 
-    const token = cookieToken || headerToken
+    const token = headerToken || cookieToken
 
     if (!token) {
         return next(new APIError(401, "Token necessário"))

@@ -34,7 +34,7 @@ async function select(query = {}, sort = null) {
 async function insert(object) {
     try {
 
-        const inserted = await db('agentes').insert(object, ["*"])
+        const inserted = await db('agentes').insert(object).returning('*')
 
         if (!inserted) {
             return false
@@ -53,7 +53,7 @@ async function update(id, updatedObject) {
         // Remove id do objeto para evitar alteração da chave primária
         const { id: _, ...dataToUpdate } = updatedObject
 
-        const updated = await db('agentes').where({id: id}).update(dataToUpdate, ["*"])
+        const updated = await db('agentes').where({id: id}).update(dataToUpdate).returning('*')
 
         if (!updated) {
             return false

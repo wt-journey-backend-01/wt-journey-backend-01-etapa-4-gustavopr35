@@ -1,4 +1,4 @@
-const usuariosRepository = require('../repositories/usersRepository')
+const usuariosRepository = require('../repositories/usuariosRepository')
 const { usuarioInputSchema, usuarioLoginSchema, usuarioIdSchema } = require('../utils/usuarioValidation')
 const bcrypt = require('bcryptjs')
 const generateToken = require('../utils/generateToken')

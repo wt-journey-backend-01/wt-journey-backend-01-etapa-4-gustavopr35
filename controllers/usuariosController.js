@@ -1,4 +1,4 @@
-const usuariosRepository = require('../repositories/usersRepository')
+const usuariosRepository = require('../repositories/usuariosRepository')
 const { usuarioInputSchema, usuarioLoginSchema, usuarioIdSchema } = require('../utils/usuarioValidation')
 
 class APIError extends Error {
@@ -17,8 +17,7 @@ async function getMe(req, res, next) {
             return next(new APIError(404, 'Usuário não encontrado.'))
         }
 
-        const { senha, ...usuarioSemSenha } = usuario
-        res.status(200).json(usuarioSemSenha)
+        res.status(200).json(usuario)
     } catch (error) {
         next(error)
     }

@@ -51,8 +51,7 @@ const agentePatchSchema = z.object({
 
 // Schema para validar apenas o id (param)
 const agenteIdSchema = z.object({
-  id: z.string().transform(val => parseInt(val, 10))
-    .refine(val => !isNaN(val) && val > 0, { message: 'ID deve ser um número inteiro positivo.' })
+  id: z.preprocess((val) => Number(val), z.number().int().positive({ message: 'ID deve ser um número inteiro positivo.' }))
 })
 
 module.exports = {
