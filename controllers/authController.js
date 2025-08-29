@@ -1,4 +1,4 @@
-const usuariosRepository = require('../repositories/usuariosRepository')
+const usuariosRepository = require('../repositories/usersRepository')
 const { usuarioInputSchema, usuarioLoginSchema, usuarioIdSchema } = require('../utils/usuarioValidation')
 const bcrypt = require('bcryptjs')
 const generateToken = require('../utils/generateToken')
@@ -34,7 +34,8 @@ async function register(req, res, next) {
             return next(new APIError(400, 'O email fornecido já está em uso.'))
         }
 
-        const hashSenha = await bcrypt.hash(senha, 10)
+        const salt = await bcrypt.genSalt(10);
+        const hashSenha = await bcrypt.hash(senha, salt)
 
         const usuario = await usuariosRepository.insert({
             nome,
@@ -99,7 +100,7 @@ async function login(req, res, next) {
 }
 
 // POST /auth/logout
-function logout(_req, res) {
+function logout(req, res) {
     res.clearCookie('token', { path: '/' })
     return res.status(200).json({
         status: 200,

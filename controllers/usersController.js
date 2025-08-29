@@ -1,4 +1,4 @@
-const usuariosRepository = require('../repositories/usuariosRepository')
+const usuariosRepository = require('../repositories/usersRepository')
 const { usuarioInputSchema, usuarioLoginSchema, usuarioIdSchema } = require('../utils/usuarioValidation')
 
 class APIError extends Error {

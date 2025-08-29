@@ -20,7 +20,7 @@ async function select(query = {}, sort = null) {
         const isSingular = Object.keys(query).length === 1 && 'id' in query
 
         if (!selected || selected.length === 0) {
-            return false
+            return isSingular ? false : []
         }
 
         return isSingular ? selected[0] : selected

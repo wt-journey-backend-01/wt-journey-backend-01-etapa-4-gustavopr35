@@ -177,6 +177,6 @@ docker compose down -v
 
 ### Erro de autenticação:
 - Verifique se o token JWT está sendo enviado corretamente
-- Verifique se o token não expirou (válido por 1 dia)
+- Verifique se o token não expirou (válido por 1 hora)
 - Certifique-se de incluir "Bearer " antes do token
 - Verifique se a variável JWT_SECRET está configurada no ambiente

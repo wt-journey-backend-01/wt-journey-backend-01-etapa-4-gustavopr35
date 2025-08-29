@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const { head } = require('../routes/authRoutes')
 
 class APIError extends Error {
     constructor(status, message) {
