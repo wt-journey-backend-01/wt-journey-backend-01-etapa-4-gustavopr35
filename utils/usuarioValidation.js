@@ -32,7 +32,7 @@ const usuarioInputSchema = z.object({
       }
     }
   }).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/, { message: 'A senha deve ter no mínimo 8 caracteres, incluindo uma letra minúscula, uma maiúscula, um número e um caractere especial.' })
-})
+}).strict()
 
 const usuarioLoginSchema = z.object({
   email: z.string({
@@ -55,7 +55,7 @@ const usuarioLoginSchema = z.object({
       }
     }
   }).min(1, { message: 'campo senha não pode ser vazio.' }),
-})
+}).strict()
 
 // Schema para validar apenas o id (param)
 const usuarioIdSchema = z.object({

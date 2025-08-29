@@ -6,9 +6,11 @@ const authRouter = require('./routes/authRoutes')
 const usuariosRouter = require('./routes/usuariosRoutes')
 const setupSwagger = require('./docs/swagger')
 const errorHandler = require('./utils/errorHandler')
+const cookieParser = require('cookie-parser')
 const PORT = 3000
 
 app.use(express.json())
+app.use(cookieParser())
 
 // Configurar Swagger
 setupSwagger(app)

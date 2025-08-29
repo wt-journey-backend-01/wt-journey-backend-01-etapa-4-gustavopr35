@@ -42,6 +42,10 @@ async function register(req, res, next) {
             senha: hashSenha
         })
 
+        if (!usuario) {
+            return next(new APIError(500, 'Internal Server Error'))
+        }
+
         res.status(201).json(usuario)
     } catch (error) {
         next(error)
@@ -87,31 +91,8 @@ async function login(req, res, next) {
         })
 
         res.status(200).json({
-            acess_token: token
+            access_token: token
         })
-    } catch (error) {
-        next(error)
-    }
-}
-
-// DELETE /users/:id
-async function deleteUser(req, res, next) {
-    try {
-        const validation = usuarioIdSchema.safeParse({ id: req.params.id })
-        if (!validation.success) {
-            return next(new APIError(400, 'O ID fornecido para o usuário é inválido. Certifique-se de usar um ID válido.'))
-        }
-
-        const { id } = validation.data
-
-        const usuarioExists = await usuariosRepository.select({ id: id })
-        if (!usuarioExists) {
-            return next(new APIError(404, 'Usuário não encontrado.'))
-        }
-
-        await usuariosRepository.remove(id)
-
-        res.status(204).send()
     } catch (error) {
         next(error)
     }
@@ -129,6 +110,5 @@ function logout(_req, res) {
 module.exports = {
     register,
     login,
-    deleteUser,
     logout,
 }

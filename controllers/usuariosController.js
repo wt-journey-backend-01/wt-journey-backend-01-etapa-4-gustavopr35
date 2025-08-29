@@ -24,6 +24,30 @@ async function getMe(req, res, next) {
     }
 }
 
+// DELETE /users/:id
+async function deleteUser(req, res, next) {
+    try {
+        const validation = usuarioIdSchema.safeParse({ id: req.params.id })
+        if (!validation.success) {
+            return next(new APIError(400, 'O ID fornecido para o usuário é inválido. Certifique-se de usar um ID válido.'))
+        }
+
+        const { id } = validation.data
+
+        const usuarioExists = await usuariosRepository.select({ id: id })
+        if (!usuarioExists) {
+            return next(new APIError(404, 'Usuário não encontrado.'))
+        }
+
+        await usuariosRepository.remove(id)
+
+        res.status(204).send()
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getMe,
+    deleteUser
 }

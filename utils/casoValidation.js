@@ -45,7 +45,7 @@ const casoInputSchema = z.object({
             }
         }
     }).int({ message: 'agente_id deve ser um número inteiro.' }).positive({ message: 'agente_id deve ser um número positivo.' }).nullable()
-})
+}).strict()
 
 // Schema para atualização total (PUT) - igual ao de criação
 const casoPutSchema = casoInputSchema.strict()
@@ -58,7 +58,7 @@ const casoPatchSchema = z.object({
         invalid_type_error: 'Status deve ser "aberto" ou "solucionado".'
     }).optional(),
     agente_id: z.number().int({ message: 'agente_id deve ser um número inteiro.' }).positive({ message: 'agente_id deve ser um número positivo.' }).nullable().optional()
-}).refine(obj => Object.keys(obj).length > 0, { message: 'Pelo menos um campo deve ser atualizado.' })
+}).strict().refine(obj => Object.keys(obj).length > 0, { message: 'Pelo menos um campo deve ser atualizado.' })
 
 // Schema para validar apenas o id (param)
 const casoIdSchema = z.object({

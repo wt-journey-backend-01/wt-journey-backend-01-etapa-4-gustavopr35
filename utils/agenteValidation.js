@@ -34,7 +34,7 @@ const agenteInputSchema = z.object({
       }
     }
   }).min(1, { message: 'Cargo não pode ser vazio.' })
-})
+}).strict()
 
 // Schema para atualização total (PUT) - igual ao de criação, mas rigoroso
 const agentePutSchema = agenteInputSchema.strict()
@@ -47,7 +47,7 @@ const agentePatchSchema = z.object({
     .refine(date => new Date(date) <= new Date(), { message: 'dataDeIncorporacao não pode ser uma data futura.' })
     .optional(),
   cargo: z.string().min(1, { message: 'Cargo não pode ser vazio.' }).optional()
-}).refine(obj => Object.keys(obj).length > 0, { message: 'Pelo menos um campo deve ser atualizado.' })
+}).strict().refine(obj => Object.keys(obj).length > 0, { message: 'Pelo menos um campo deve ser atualizado.' })
 
 // Schema para validar apenas o id (param)
 const agenteIdSchema = z.object({
