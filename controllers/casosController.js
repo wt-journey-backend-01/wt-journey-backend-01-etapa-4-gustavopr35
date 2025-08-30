@@ -36,7 +36,7 @@ async function getAllCasos(req, res, next) {
 
         const casos = await casosRepository.select(query)
     
-        res.status(200).json(casos)
+        return res.status(200).json(casos)
     } catch (error) {
         next(error)
     }
@@ -57,7 +57,7 @@ async function getCasoById(req, res, next) {
             return next(new APIError(404, 'Caso não encontrado.'))
         }
     
-        res.status(200).json(caso)
+        return res.status(200).json(caso)
     } catch (error) {
         next(error)
     }
@@ -86,7 +86,7 @@ async function getAgenteByCaso(req, res, next) {
         // Formatar data de forma segura
         const agenteFormatado = formatAgenteWithSafeDate(agente)
 
-        res.status(200).json(agenteFormatado)
+        return res.status(200).json(agenteFormatado)
     } catch (error) {
         next(error)
     }
@@ -103,7 +103,7 @@ async function searchInCaso(req, res, next) {
 
         const casos = await casosRepository.searchTermo(q)
     
-        res.status(200).json(casos)
+        return res.status(200).json(casos)
     } catch (error) {
         next(error)
     }
@@ -145,7 +145,7 @@ async function insertCaso(req, res, next) {
 
         const created = await casosRepository.insert(caso)
 
-        res.status(201).json(created)
+        return res.status(201).json(created)
     } catch (error) {
         next(error)
     }
@@ -199,7 +199,7 @@ async function putCaso(req, res, next) {
 
         const updated = await casosRepository.update(id, casoUpdate)
 
-        res.status(200).json(updated)
+        return res.status(200).json(updated)
     } catch (error) {
         next(error)
     }
@@ -264,7 +264,7 @@ async function patchCaso(req, res, next) {
 
         const updated = await casosRepository.update(id, casoUpdate)
 
-        res.status(200).json(updated)
+        return res.status(200).json(updated)
     } catch (error) {
         next(error)
     }
@@ -287,7 +287,7 @@ async function deleteCaso(req, res, next) {
     
         await casosRepository.remove(id)
         
-        res.status(204).send()
+        return res.status(204).send()
     } catch (error) {
         next(error)
     }

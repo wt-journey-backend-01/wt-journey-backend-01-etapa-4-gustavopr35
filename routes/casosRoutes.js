@@ -100,7 +100,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
  *                  example: 2024-08-05
  *              cargo:
  *                  type: string
- *                  example: delegado
+ *                  example: Delegado
  */
 
 /**

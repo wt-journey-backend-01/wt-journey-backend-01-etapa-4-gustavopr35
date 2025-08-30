@@ -21,7 +21,7 @@ app.use('/casos', casosRouter)
 
 app.use('/auth', authRouter)
 
-app.use('/', usuariosRouter)
+app.use(usuariosRouter)
 
 app.use((req, res) => {
     res.status(404).json({

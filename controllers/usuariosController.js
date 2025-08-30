@@ -17,7 +17,7 @@ async function getMe(req, res, next) {
             return next(new APIError(404, 'Usuário não encontrado.'))
         }
 
-        res.status(200).json(usuario)
+        return res.status(200).json(usuario)
     } catch (error) {
         next(error)
     }
@@ -40,7 +40,7 @@ async function deleteUser(req, res, next) {
 
         await usuariosRepository.remove(id)
 
-        res.status(204).send()
+        return res.status(204).send()
     } catch (error) {
         next(error)
     }

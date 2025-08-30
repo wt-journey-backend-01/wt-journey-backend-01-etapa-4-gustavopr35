@@ -36,7 +36,7 @@ async function getAllAgentes(req, res, next) {
             agentesFormatados = agentes.map(agente => formatAgenteWithSafeDate(agente))
         }
 
-        res.status(200).json(agentesFormatados)
+        return res.status(200).json(agentesFormatados)
     } catch (error) {
         next(error)
     }
@@ -60,7 +60,7 @@ async function getAgenteById(req, res, next) {
         // Formatar data de forma segura
         const agenteFormatado = formatAgenteWithSafeDate(agente)
 
-        res.status(200).json(agenteFormatado)
+        return res.status(200).json(agenteFormatado)
     } catch (error) {
         next(error)
     }
@@ -83,7 +83,7 @@ async function getCasosByAgente(req, res, next) {
 
         const casos = await casosRepository.select({ agente_id: id })
 
-        res.status(200).json(casos)
+        return res.status(200).json(casos)
     } catch (error) {
         next(error)
     }
@@ -122,7 +122,7 @@ async function insertAgente(req, res, next) {
             agenteFormatado = formatAgenteWithSafeDate(created)
         }
 
-        res.status(201).json(agenteFormatado)
+        return res.status(201).json(agenteFormatado)
     } catch (error) {
         next(error)
     }
@@ -173,7 +173,7 @@ async function putAgente(req, res, next) {
             agenteFormatado = formatAgenteWithSafeDate(updated)
         }
 
-        res.status(200).json(agenteFormatado)
+        return res.status(200).json(agenteFormatado)
     } catch (error) {
         next(error)
     }
@@ -233,7 +233,7 @@ async function patchAgente(req, res, next) {
             agenteFormatado = formatAgenteWithSafeDate(updated)
         }
 
-        res.status(200).json(agenteFormatado)
+        return res.status(200).json(agenteFormatado)
     } catch (error) {
         next(error)
     }
@@ -256,7 +256,7 @@ async function deleteAgente(req, res, next) {
     
         await agentesRepository.remove(id)
         
-        res.status(204).send()
+        return res.status(204).send()
     } catch (error) {
         next(error)
     }

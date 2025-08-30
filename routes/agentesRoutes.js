@@ -32,7 +32,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
  *           example: 2024-08-05
  *         cargo:
  *           type: string
- *           example: delegado
+ *           example: Delegado
  *     AgenteInput:
  *       type: object
  *       required:
@@ -48,7 +48,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
  *           example: 2024-08-05
  *         cargo:
  *           type: string
- *           example: delegado
+ *           example: Delegado
  *     AgentePatchInput:
  *       type: object
  *       properties:
@@ -60,7 +60,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
  *           example: 2024-08-05
  *         cargo:
  *           type: string
- *           example: delegado
+ *           example: Delegado
  */
 
 /**
@@ -76,7 +76,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
  *           type: string
  *         required: false
  *         description: Filtra a lista de agentes por cargo
- *         example: delegado
+ *         example: Delegado
  *       - in: query
  *         name: sort
  *         schema:

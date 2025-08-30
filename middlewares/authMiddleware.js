@@ -18,12 +18,12 @@ function authMiddleware(req, res, next) {
     if (!token) {
         return next(new APIError(401, "Token necessário"))
     }
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET || "secret", (err, user) => {
         if (err) {
             return next(new APIError(401, "Token inválido"))
         }
         req.user = user
-        next()
+        return next()
     })
 }
 

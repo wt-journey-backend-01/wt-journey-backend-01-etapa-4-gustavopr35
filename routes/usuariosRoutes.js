@@ -4,6 +4,6 @@ const usuariosController = require('../controllers/usuariosController')
 const authMiddleware = require('../middlewares/authMiddleware')
 
 router.get('/usuarios/me', authMiddleware, usuariosController.getMe)
-router.delete('/users/:id', authMiddleware, usuariosController.deleteUser)
+router.delete('/users/:id', usuariosController.deleteUser)
 
 module.exports = router

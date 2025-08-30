@@ -47,7 +47,7 @@ async function register(req, res, next) {
             return next(new APIError(500, 'Internal Server Error'))
         }
 
-        res.status(201).json(usuario)
+        return res.status(201).json({ nome: usuario.nome, email: usuario.email })
     } catch (error) {
         next(error)
     }
@@ -81,17 +81,17 @@ async function login(req, res, next) {
             return next(new APIError(401, 'Email ou senha inválidos.'))
         }
 
-        const token = generateToken({ id: usuarioExists.id, nome: usuarioExists.nome, email: usuarioExists.email })
+        const token = generateToken({ id: usuarioExists.id, email: usuarioExists.email })
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 1000,
-            path: '/',
-        })
+        // res.cookie('token', token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV === 'production',
+        //     sameSite: 'lax',
+        //     maxAge: 60 * 60 * 1000,
+        //     path: '/',
+        // })
 
-        res.status(200).json({
+        return res.status(200).json({
             access_token: token
         })
     } catch (error) {
@@ -100,12 +100,21 @@ async function login(req, res, next) {
 }
 
 // POST /auth/logout
-function logout(req, res) {
-    res.clearCookie('token', { path: '/' })
-    return res.status(200).json({
-        status: 200,
-        message: 'Logout efetuado com sucesso.'
-    })
+async function logout(req, res) {
+    // res.clearCookie('token', { path: '/' })
+    // return res.status(200).json({
+    //     status: 200,
+    //     message: 'Logout efetuado com sucesso.'
+    // })
+    try {
+        req.user = undefined
+
+        return res.status(200).json({
+            message: 'Logout efetuado com sucesso.'
+        })
+    } catch (error) {
+        next(error)
+    }
 }
 
 module.exports = {
