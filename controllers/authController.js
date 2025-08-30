@@ -83,13 +83,13 @@ async function login(req, res, next) {
 
         const token = generateToken({ id: usuarioExists.id, email: usuarioExists.email })
 
-        // res.cookie('token', token, {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === 'production',
-        //     sameSite: 'lax',
-        //     maxAge: 60 * 60 * 1000,
-        //     path: '/',
-        // })
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 60 * 60 * 1000,
+            path: '/',
+        })
 
         return res.status(200).json({
             access_token: token
@@ -101,13 +101,10 @@ async function login(req, res, next) {
 
 // POST /auth/logout
 async function logout(req, res) {
-    // res.clearCookie('token', { path: '/' })
-    // return res.status(200).json({
-    //     status: 200,
-    //     message: 'Logout efetuado com sucesso.'
-    // })
     try {
         req.user = undefined
+        
+        res.clearCookie('token', { path: '/' })
 
         return res.status(200).json({
             message: 'Logout efetuado com sucesso.'

@@ -47,7 +47,7 @@ async function getAgenteById(req, res, next) {
     try {
         const validation = agenteIdSchema.safeParse({ id: req.params.id })  
         if (!validation.success) {
-            return next(new APIError(400, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
         }
 
         const { id } = validation.data
@@ -71,7 +71,7 @@ async function getCasosByAgente(req, res, next) {
     try {
         const validation = agenteIdSchema.safeParse({ id: req.params.id })
         if (!validation.success) {
-            return next(new APIError(400, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
         }
 
         const { id } = validation.data
@@ -133,7 +133,7 @@ async function putAgente(req, res, next) {
     try {
         const IDvalidation = agenteIdSchema.safeParse({ id: req.params.id })
         if (!IDvalidation.success) {
-            return next(new APIError(400, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
         }
         
         const bodyValidation = agentePutSchema.safeParse(req.body)
@@ -184,7 +184,7 @@ async function patchAgente(req, res, next) {
     try {
         const IDvalidation = agenteIdSchema.safeParse({ id: req.params.id })
         if (!IDvalidation.success) {
-            return next(new APIError(400, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
         }
 
         const bodyValidation = agentePatchSchema.safeParse(req.body)
@@ -244,7 +244,7 @@ async function deleteAgente(req, res, next) {
     try {
         const validation = agenteIdSchema.safeParse({ id: req.params.id })
         if (!validation.success) {
-            return next(new APIError(400, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
         }
 
         const { id } = validation.data

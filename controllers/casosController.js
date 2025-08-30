@@ -22,7 +22,7 @@ async function getAllCasos(req, res, next) {
         if (agente_id) {
             const agentValidation = agenteIdSchema.safeParse({ id: agente_id })
             if (!agentValidation.success) {
-                return next(new APIError(400, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
+                return next(new APIError(404, 'O ID fornecido para o agente é inválido. Certifique-se de usar um ID válido.'))
             }
             query.agente_id = agentValidation.data.id
         }
@@ -47,7 +47,7 @@ async function getCasoById(req, res, next) {
     try {
         const validation = casoIdSchema.safeParse({ id: req.params.id })
         if (!validation.success) {
-            return next(new APIError(400, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
         }
         
         const { id } = validation.data
@@ -68,7 +68,7 @@ async function getAgenteByCaso(req, res, next) {
     try {
         const validation = casoIdSchema.safeParse({ id: req.params.id })
         if (!validation.success) {
-            return next(new APIError(400, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
         }
         
         const { id } = validation.data
@@ -156,7 +156,7 @@ async function putCaso(req, res, next) {
     try {
         const IDvalidation = casoIdSchema.safeParse({ id: req.params.id })
         if (!IDvalidation.success) {
-            return next(new APIError(400, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
         }
 
         const bodyValidation = casoPutSchema.safeParse(req.body)
@@ -210,7 +210,7 @@ async function patchCaso(req, res, next) {
     try {
         const IDvalidation = casoIdSchema.safeParse({ id: req.params.id })
         if (!IDvalidation.success) {
-            return next(new APIError(400, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
         }
 
         const bodyValidation = casoPatchSchema.safeParse(req.body)
@@ -275,7 +275,7 @@ async function deleteCaso(req, res, next) {
     try {
         const validation = casoIdSchema.safeParse({ id: req.params.id })
         if (!validation.success) {
-            return next(new APIError(400, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
+            return next(new APIError(404, 'O ID fornecido para o caso é inválido. Certifique-se de usar um ID válido.'))
         }
         
         const { id } = validation.data
