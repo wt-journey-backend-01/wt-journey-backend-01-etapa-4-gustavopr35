@@ -12,7 +12,7 @@ const PORT = 3000
 app.use(express.json())
 app.use(cookieParser())
 
-// Configurar Swagger
+// Configura o Swagger
 setupSwagger(app)
 
 app.use('/agentes' ,agentesRouter)
